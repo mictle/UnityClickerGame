@@ -15,11 +15,13 @@ Unity 6000.3.24f1で作成した、2Dクリックゲームの検証プロジェ�
 
 Pull RequestではWebGLビルドとArtifact生成を行います。`main`へのpushではビルド後にGitHub Pagesへ公開します。
 
-GitHubリポジトリのSecretsに、利用するUnity CI認証情報を登録してください。
+GitHubリポジトリのSecretsに、Unity Personal用のCI認証情報を登録してください。
 
+- `UNITY_LICENSE`：Unity Hubで生成した`.ulf`ファイルの内容
 - `UNITY_EMAIL`
 - `UNITY_PASSWORD`
-- `UNITY_SERIAL`
+
+`UNITY_SERIAL`はUnity Pro/Plus等のシリアルライセンス用で、Unity Personalでは使用しません。
 
 リポジトリのSettings > Pages > Build and deploymentで、SourceをGitHub Actionsに設定します。
 
