@@ -28,6 +28,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify Unity CI secrets are available
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        run: |
+          test -n "$UNITY_LICENSE" || { echo "UNITY_LICENSE is missing or unavailable in the github-pages environment"; exit 1; }
+          test -n "$UNITY_EMAIL" || { echo "UNITY_EMAIL is missing or unavailable in the github-pages environment"; exit 1; }
+          test -n "$UNITY_PASSWORD" || { echo "UNITY_PASSWORD is missing or unavailable in the github-pages environment"; exit 1; }
+          echo "Unity CI secrets are available."
+
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
         env:
