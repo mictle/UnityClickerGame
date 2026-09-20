@@ -71,7 +71,10 @@ public static class BuildScript
         PlayerSettings.SetIl2CppCodeGeneration(namedTarget, Il2CppCodeGeneration.OptimizeSize);
         PlayerSettings.WebGL.dataCaching = true;
         PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
-        PlayerSettings.WebGL.decompressionFallback = false;
+        // GitHub Pages does not reliably add Content-Encoding: gzip to Unity's
+        // pre-compressed .gz files. Enable the fallback decompressor so the
+        // browser can load the build without server-side header configuration.
+        PlayerSettings.WebGL.decompressionFallback = true;
         PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.None;
         PlayerSettings.WebGL.debugSymbolMode = WebGLDebugSymbolMode.Off;
         PlayerSettings.WebGL.wasm2023 = true;
